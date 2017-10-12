@@ -79,7 +79,7 @@ double LazySquare::get_area()
 }
 
 
-int main()//int argc, char** argv) 
+int main()
 {
     AdHocSquare ahs(4.0);
     
