@@ -12,34 +12,75 @@
  */
 
 #include <cstdlib>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+class AdHocSquare 
+{
+public:
+    AdHocSquare(double side);
+    void set_side(double side);
+    double get_area();
+private:
+    double side;
+};
 
-    class AdHocSquare 
+class LazySquare 
+{
+public:
+    LazySquare(double side);
+    void set_side(double side);
+    double get_area();
+private:
+    double side;
+    double area;
+    bool side_changed;
+};
+
+AdHocSquare::AdHocSquare(double side)
+{
+    this->side = side;
+};
+
+double AdHocSquare::get_area()
+{
+    this->side = side;
+    return side * side;
+};
+
+LazySquare::LazySquare(double side)
+{
+    this->side = side;
+    this->side_changed = true;
+};
+
+double LazySquare::get_area()
+{
+    if(this->side_changed)
     {
-    public:
-        AdHocSquare(double side); 
-        void set_side(double side); 
-        double get_area();
-    private:
-        double side;
-    };
+        this->side = side;
+        this->area = side * side;
+        this->side_changed = false;
+        return area;
+    }
+    else
+    {
+        return area;
+    }
+}
+
+
+int main()//int argc, char** argv) 
+{
+    AdHocSquare ahs(4.0);
     
-    class LazySquare 
-    {
-    public:
-        AdHocSquare(double side); 
-        void set_side(double side); 
-        double get_area();
-    private: 
-        double side;
-        double area;
-        bool side_changed;
-    };
+    LazySquare ls(5.0);
+    
+    cout << "AdHocSquare = " << ahs.get_area() << endl;
+    cout << "LazySquare = " << ls.get_area() << endl;
+    
+    return 0;
 }
 
