@@ -51,9 +51,16 @@ double AdHocSquare::get_area()
 };
 
 LazySquare::LazySquare(double side)
-{
-    this->side = side;
-    this->side_changed = true;
+{    
+    if(this->side != side)
+    {
+        this->side = side;
+        this->side_changed = true;
+    }
+    else
+    {
+        side_changed = false;
+    }
 };
 
 double LazySquare::get_area()
